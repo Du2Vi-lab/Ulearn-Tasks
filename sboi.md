@@ -42,5 +42,5 @@ classDiagram
     ReportMaker ..> Common : вызывает старый метод
     ReportMaker --> Device : Смотрит список устройств
     ReportMaker --> Failure : Обрабатывает список сбоев
-    Failure --> FailureType : содержит тип сбоя
+    Failure --> FailureType : Содержит типы сбоя
 ```
