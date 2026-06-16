@@ -7,8 +7,16 @@
 ## 1. Диаграмма классов
 ```mermaid
 classDiagram
+    class FailureType {
+        <<enumeration>>
+        UnexpectedShutdown = 0
+        ShortNonResponding = 1
+        HardwareFailures = 2
+        ConnectionProblems = 3
+    }
+
     class Common {
-        + IsFailureSerious(failureType: int) int
+        + IsFailureSerious(failureType: int) int$
         + Earlier(v: object[], day: int, month: int, year: int) int$
     }
 
@@ -19,10 +27,10 @@ classDiagram
     }
 
     class Failure {
-        + FailureType: int
+        + FailureType: FailureType
         + Date: DateTime
         + Failure(failureType: int, date: DateTime)
-        + IsFailureSerious() bool
+        + IsFailureSerious() int
     }
 
     class ReportMaker {
@@ -30,8 +38,9 @@ classDiagram
         + FindDevicesFailedBeforeDateObsolete(day: int, month: int, year: int, failureTypes: int[], deviceId: int[], times: object[][], devices: List~Dictionary~string, object~~) List~string~$
     }
 
+    %% Связи и подписи в точности как на твоем скриншоте + связь с enum
     ReportMaker ..> Common : вызывает старый метод
     ReportMaker --> Device : Смотрит список устройств
     ReportMaker --> Failure : Обрабатывает список сбоев
-    
+    Failure --> FailureType : содержит тип сбоя
 ```
