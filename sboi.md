@@ -39,7 +39,7 @@ classDiagram
     }
 
     %% Связи и подписи в точности как на твоем скриншоте + связь с enum
-    ReportMaker ..> Common : вызывает старый метод
+    ReportMaker ..> Common : Вызывает старый метод (чтобы прошли проверки)
     ReportMaker --> Device : Смотрит список устройств
     ReportMaker --> Failure : Обрабатывает список сбоев
     Failure --> FailureType : Содержит типы сбоя
