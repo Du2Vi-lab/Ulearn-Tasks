@@ -30,8 +30,8 @@ classDiagram
         + FindDevicesFailedBeforeDateObsolete(day: int, month: int, year: int, failureTypes: int[], deviceId: int[], times: object[][], devices: List~Dictionary~string, object~~) List~string~$
     }
 
-    ReportMaker ..> Common : вызывает старые методы
-    ReportMaker ..> Device : использует список устройств
-    ReportMaker ..> Failure : обрабатывает массив сбоев
+    ReportMaker ..> Common : вызывает старый метод
+    ReportMaker --> Device : Смотрит список устройств
+    ReportMaker --> Failure : Обрабатывает список сбоев
     
 ```
