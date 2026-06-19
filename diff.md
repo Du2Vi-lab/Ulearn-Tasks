@@ -10,7 +10,6 @@
 
 classDiagram
     class Algebra {
-        <<static>>
         -Dictionary~ExpressionType, Func~ OpRules$
         -Dictionary~MethodInfo, Func~ FuncRules$
         -MethodInfo SinMethod$
@@ -20,7 +19,6 @@ classDiagram
     }
 
     class Expression {
-        <<System.Linq.Expressions>>
         +Add(left, right)$
         +Multiply(left, right)$
         +Call(method, arguments)$
@@ -29,7 +27,6 @@ classDiagram
     }
 
     class MethodInfo {
-        <<System.Reflection>>
     }
 
     Algebra ..> Expression : Использует
