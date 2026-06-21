@@ -9,7 +9,6 @@
 ```mermaid
 
 classDiagram
-    %% Interfaces
     class IRobotAI~TCommand~ {
         <<interface>>
         +GetCommand() TCommand
@@ -20,7 +19,6 @@ classDiagram
         +ExecuteCommand(TCommand command) string
     }
 
-    %% Abstract Classes
     class RobotAI~TCommand~ {
         <<abstract>>
         +GetCommand()* TCommand
@@ -31,7 +29,6 @@ classDiagram
         +ExecuteCommand(TCommand command)* string
     }
 
-    %% Concrete Classes
     class ShooterAI {
         -int counter
         +GetCommand() ShooterCommand
@@ -62,18 +59,17 @@ classDiagram
         +Create~TCommand~(IRobotAI~TCommand~ ai, IDevice~TCommand~ executor) Robot~TCommand~
     }
 
-    %% Relationships
-    RobotAI~TCommand~ ..|> IRobotAI~TCommand~ : Реализует
-    Device~TCommand~ ..|> IDevice~TCommand~ : Реализует
+    IRobotAI~TCommand~ <|.. RobotAI~TCommand~ : Реализует
+    IDevice~TCommand~ <|.. Device~TCommand~ : Реализует
 
-    ShooterAI --|> RobotAI~ShooterCommand~ : Наследует
-    BuilderAI --|> RobotAI~BuilderCommand~ : Наследует
+    RobotAI~ShooterCommand~ <|-- ShooterAI : Наследует
+    RobotAI~BuilderCommand~ <|-- BuilderAI : Наследует
+    Device~IMoveCommand~ <|-- Mover : Наследует
+    Device~IShooterMoveCommand~ <|-- ShooterMover : Наследует
 
-    Mover --|> Device~IMoveCommand~ : Наследует
-    ShooterMover --|> Device~IShooterMoveCommand~ : Наследует
-
-    Robot~TCommand~ --> IRobotAI~TCommand~ : Композиция (ai)
-    Robot~TCommand~ --> IDevice~TCommand~ : Композиция (device)
+    Robot~TCommand~ *-- IRobotAI~TCommand~ : Композиция (ai)
+    Robot~TCommand~ *-- IDevice~TCommand~ : Композиция (device)
+    
     RobotFactory ..> Robot~TCommand~ : Создает
     
 ```
