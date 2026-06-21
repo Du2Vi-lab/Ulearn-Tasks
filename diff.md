@@ -7,29 +7,49 @@
 ## 2. Диаграмма классов (Mermaid)
 
 ```mermaid
-
 classDiagram
     class Algebra {
-        -Dictionary~ExpressionType, Func~ OpRules$
-        -Dictionary~MethodInfo, Func~ FuncRules$
-        -MethodInfo SinMethod$
-        -MethodInfo CosMethod$
-        +Differentiate(Expression~Func~ function)$ Expression~Func~
-        -Differentiate(Expression expr)$ Expression
+        <<static>>
+        -Dictionary~ExpressionType, Func~ OpRules\$
+        -Dictionary~MethodInfo, Func~ FuncRules\(-MethodInfo SinMethod\)
+        -MethodInfo CosMethod\(+Differentiate(Expression~Func~ function)\) Expression~Func~
+        -Differentiate(Expression expr)\$ Expression
     }
 
     class Expression {
-        +Add(left, right)$
-        +Multiply(left, right)$
-        +Call(method, arguments)$
-        +Constant(value)$
-        +Lambda(body, parameters)$
+        <<System.Linq.Expressions>>
+        +Add(left, right)\$
+        +Multiply(left, right)\(+Call(method, arguments)\)
+        +Constant(value)\(+Lambda(body, parameters)\)
+    }
+
+    class ConstantExpression {
+        +Value object
+    }
+
+    class BinaryExpression {
+        +Expression Left
+        +Expression Right
+    }
+
+    class MethodCallExpression {
+        +MethodInfo Method
+        +ReadOnlyCollection~Expression~ Arguments
+    }
+
+    class ParameterExpression {
+        +string Name
     }
 
     class MethodInfo {
+        <<System.Reflection>>
     }
+
+    Expression <|-- ConstantExpression : наследует
+    Expression <|-- BinaryExpression : наследует
+    Expression <|-- MethodCallExpression : наследует
+    Expression <|-- ParameterExpression : наследует
 
     Algebra ..> Expression : Использует
     Algebra ..> MethodInfo : Хранит
-    
 ```
