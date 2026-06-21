@@ -10,7 +10,6 @@
 ## 2. Диаграмма классов (Mermaid)
 
 ```mermaid
-
 classDiagram
     %% Интерфейсы
     class InterfaceOwner {
@@ -73,7 +72,9 @@ classDiagram
     %% Статический класс логики
     class Interaction {
         <<static>>
-        +Make(Player player, object mapObject)
+        +Make(Player player, InterfaceArmy armyObj)\$
+        +Make(Player player, InterfaceOwner dwellingObj)\$
+        +Make(Player player, InterfaceTreasure treasureObj)\$
     }
 
     %% Зависимости метода Make
@@ -81,5 +82,4 @@ classDiagram
     Interaction ..> InterfaceArmy : проверяет
     Interaction ..> InterfaceOwner : проверяет
     Interaction ..> InterfaceTreasure : проверяет
-    
 ```
