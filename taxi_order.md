@@ -7,7 +7,6 @@
 ## 2. Диаграмма классов (Mermaid)
 
 ```mermaid
-
 classDiagram
     direction TB
 
@@ -28,16 +27,16 @@ classDiagram
 
     namespace Domain {
         class TaxiOrder {
-            +PersonName ClientName
-            +Address Start
-            +Address Destination
-            +Driver Driver
-            +TaxiOrderStatus Status
-            +DateTime CreationTime
-            +DateTime DriverAssignmentTime
-            +DateTime CancelTime
-            +DateTime StartRideTime
-            +DateTime FinishRideTime
+            +PersonName ClientName {get; private set}
+            +Address Start {get; private set}
+            +Address Destination {get; private set}
+            +Driver Driver {get; private set}
+            +TaxiOrderStatus Status {get; private set}
+            +DateTime CreationTime {get; private set}
+            +DateTime DriverAssignmentTime {get; private set}
+            +DateTime CancelTime {get; private set}
+            +DateTime StartRideTime {get; private set}
+            +DateTime FinishRideTime {get; private set}
             +TaxiOrder(int id, PersonName clientName, Address start, DateTime creationTime)
             +UpdateDestination(Address destination) void
             +AssignDriver(Driver driver, DateTime time) void
@@ -48,15 +47,15 @@ classDiagram
         }
 
         class Driver {
-            +PersonName Name
-            +Car Car
+            +PersonName Name {get; private set}
+            +Car Car {get; private set}
             +Driver(int id, PersonName name, string carColor, string carModel, string carPlateNumber)
         }
 
         class Car {
-            +string Color
-            +string Model
-            +string PlateNumber
+            +string Color {get; private set}
+            +string Model {get; private set}
+            +string PlateNumber {get; private set}
             +Car(string color, string model, string plateNumber)
         }
 
@@ -88,9 +87,6 @@ classDiagram
             +Cancel(TaxiOrder order) void
             +StartRide(TaxiOrder order) void
             +FinishRide(TaxiOrder order) void
-            -GetLastProgressTime(TaxiOrder order) DateTime
-            -FormatName(...) string
-            -FormatAddress(...) string
         }
     }
 
@@ -106,8 +102,7 @@ classDiagram
     Driver "1" *-- "1" PersonName : Name
     Driver "1" *-- "1" Car : Car
 
-    TaxiApi ..> TaxiOrder : вызывает методы
-    TaxiApi --> DriversRepository : использует для поиска
-    DriversRepository ..> Driver : запрашивает и создаёт
-    
+    TaxiApi ..> TaxiOrder : управляет процессами
+    TaxiApi --> DriversRepository : запрашивает данные
+    DriversRepository ..> Driver : поставляет доменные сущности
 ```
