@@ -27,16 +27,16 @@ classDiagram
 
     namespace Domain {
         class TaxiOrder {
-            +PersonName ClientName {get; private set}
-            +Address Start {get; private set}
-            +Address Destination {get; private set}
-            +Driver Driver {get; private set}
-            +TaxiOrderStatus Status {get; private set}
-            +DateTime CreationTime {get; private set}
-            +DateTime DriverAssignmentTime {get; private set}
-            +DateTime CancelTime {get; private set}
-            +DateTime StartRideTime {get; private set}
-            +DateTime FinishRideTime {get; private set}
+            +PersonName ClientName
+            +Address Start
+            +Address Destination
+            +Driver Driver
+            +TaxiOrderStatus Status
+            +DateTime CreationTime
+            +DateTime DriverAssignmentTime
+            +DateTime CancelTime
+            +DateTime StartRideTime
+            +DateTime FinishRideTime
             +TaxiOrder(int id, PersonName clientName, Address start, DateTime creationTime)
             +UpdateDestination(Address destination) void
             +AssignDriver(Driver driver, DateTime time) void
@@ -47,15 +47,15 @@ classDiagram
         }
 
         class Driver {
-            +PersonName Name {get; private set}
-            +Car Car {get; private set}
+            +PersonName Name
+            +Car Car
             +Driver(int id, PersonName name, string carColor, string carModel, string carPlateNumber)
         }
 
         class Car {
-            +string Color {get; private set}
-            +string Model {get; private set}
-            +string PlateNumber {get; private set}
+            +string Color
+            +string Model
+            +string PlateNumber
             +Car(string color, string model, string plateNumber)
         }
 
