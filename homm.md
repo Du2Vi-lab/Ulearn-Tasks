@@ -11,7 +11,6 @@
 
 ```mermaid
 classDiagram
-    %% Интерфейсы
     class InterfaceOwner {
         <<interface>>
         +int Owner
@@ -25,7 +24,6 @@ classDiagram
         +Treasure Treasure
     }
 
-    %% Классы карты
     class Dwelling {
         +int Owner
     }
@@ -45,7 +43,6 @@ classDiagram
         +Treasure Treasure
     }
 
-    %% Реализация интерфейсов
     InterfaceOwner <|.. Dwelling
     InterfaceOwner <|.. Mine
     InterfaceArmy <|.. Mine
@@ -55,7 +52,6 @@ classDiagram
     InterfaceArmy <|.. Wolves
     InterfaceTreasure <|.. ResourcePile
 
-    %% Внешние сущности (типы данных)
     class Army
     class Treasure
     class Player {
@@ -65,19 +61,14 @@ classDiagram
         +Consume(Treasure)
     }
 
-    %% Ассоциации свойств
     InterfaceArmy --> Army : содержит
     InterfaceTreasure --> Treasure : содержит
 
-    %% Статический класс логики
     class Interaction {
         <<static>>
-        +Make(Player player, InterfaceArmy armyObj)\$
-        +Make(Player player, InterfaceOwner dwellingObj)\$
-        +Make(Player player, InterfaceTreasure treasureObj)\$
+        +Make~TMapObject~(Player player, TMapObject mapObject)\$
     }
 
-    %% Зависимости метода Make
     Interaction ..> Player : использует
     Interaction ..> InterfaceArmy : проверяет
     Interaction ..> InterfaceOwner : проверяет
