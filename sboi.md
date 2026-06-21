@@ -16,31 +16,30 @@ classDiagram
     }
 
     class Common {
-        + IsFailureSerious(failureType: int) int$
-        + Earlier(v: object[], day: int, month: int, year: int) int$
+        +IsFailureSerious(failureType: int) int\$
+        +Earlier(v: object[], day: int, month: int, year: int) int\$
     }
 
     class Device {
-        + Id: int
-        + Name: string
-        + Device(id: int, name: string)
+        +Id: int
+        +Name: string
+        +Device(id: int, name: string)
     }
 
     class Failure {
-        + FailureType: FailureType
-        + Date: DateTime
-        + Failure(failureType: int, date: DateTime)
-        + IsFailureSerious() int
+        +FailureType: int
+        +Date: DateTime
+        +Failure(failureType: int, date: DateTime)
+        +IsFailureSerious() int
     }
 
     class ReportMaker {
-        + FindDevicesFailedBeforeDate(date: DateTime, failures: Failure[], deviceId: int[], devices: List~Device~) List~string~$
-        + FindDevicesFailedBeforeDateObsolete(day: int, month: int, year: int, failureTypes: int[], deviceId: int[], times: object[][], devices: List~Dictionary~string, object~~) List~string~$
+        +FindDevicesFailedBeforeDate(date: DateTime, failures: Failure[], deviceId: int[], devices: List~Device~) List~string~\$
+        +FindDevicesFailedBeforeDateObsolete(day: int, month: int, year: int, failureTypes: int[], deviceId: int[], times: object[][], devices: List~Dictionary~string, object~~) List~string~\$
     }
 
-    %% Связи и подписи в точности как на твоем скриншоте + связь с enum
-    ReportMaker ..> Common : Вызывает старый метод (чтобы прошли проверки)
-    ReportMaker --> Device : Смотрит список устройств
-    ReportMaker --> Failure : Обрабатывает список сбоев
-    Failure --> FailureType : Содержит типы сбоя
+    ReportMaker ..> Common : вызывает устаревший метод
+    ReportMaker ..> Device : обрабатывает сущности устройств
+    ReportMaker ..> Failure : обрабатывает сущности сбоев
+    Failure ..> FailureType : использует для классификации
 ```
