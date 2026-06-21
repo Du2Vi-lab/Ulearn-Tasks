@@ -59,17 +59,17 @@ classDiagram
         +Create~TCommand~(IRobotAI~TCommand~ ai, IDevice~TCommand~ executor) Robot~TCommand~
     }
 
-    IRobotAI~TCommand~ <|.. RobotAI~TCommand~ : Реализует
-    IDevice~TCommand~ <|.. Device~TCommand~ : Реализует
+    IRobotAI~TCommand~ <|.. RobotAI~TCommand~ : реализует
+    IDevice~TCommand~ <|.. Device~TCommand~ : реализует
 
-    RobotAI~ShooterCommand~ <|-- ShooterAI : Наследует
-    RobotAI~BuilderCommand~ <|-- BuilderAI : Наследует
-    Device~IMoveCommand~ <|-- Mover : Наследует
-    Device~IShooterMoveCommand~ <|-- ShooterMover : Наследует
+    RobotAI~ShooterCommand~ <|-- ShooterAI : наследует
+    RobotAI~BuilderCommand~ <|-- BuilderAI : наследует
+    Device~IMoveCommand~ <|-- Mover : наследует
+    Device~IShooterMoveCommand~ <|-- ShooterMover : наследует
 
-    Robot~TCommand~ *-- IRobotAI~TCommand~ : Композиция (ai)
-    Robot~TCommand~ *-- IDevice~TCommand~ : Композиция (device)
+    Robot~TCommand~ *-- IRobotAI~TCommand~ : композиция (ai)
+    Robot~TCommand~ *-- IDevice~TCommand~ : композиция (device)
     
-    RobotFactory ..> Robot~TCommand~ : Создает
+    RobotFactory ..> Robot~TCommand~ : создает
     
 ```
