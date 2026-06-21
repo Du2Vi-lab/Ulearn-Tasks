@@ -21,18 +21,24 @@ classDiagram
         +MakeReport(IEnumerable~Measurement~ measurements) string
     }
 
+    class ReportFormatter {
+        +HtmlMakeCaption(string caption) string
+        +HtmlBeginList() string
+        +HtmlEndList() string
+        +HtmlMakeItem(string valueType, string entry) string
+        +MdMakeCaption(string caption) string
+        +MdBeginList() string
+        +MdEndList() string
+        +MdMakeItem(string valueType, string entry) string
+    }
+
+    class ReportCalculator {
+        +MeanAndStdStats(IEnumerable~double~ rawData) object
+        +MedianStats(IEnumerable~double~ rawData) object
+    }
+
     class ReportMakerHelper {
         <<static>>
-        -HtmlMakeCaption(string caption)* string
-        -HtmlBeginList()* string
-        -HtmlEndList()* string
-        -HtmlMakeItem(string valueType, string entry)* string
-        -MdMakeCaption(string caption)* string
-        -MdBeginList()* string
-        -MdEndList()* string
-        -MdMakeItem(string valueType, string entry)* string
-        -MeanAndStdStats(IEnumerable~double~ rawData)* object
-        -MedianStats(IEnumerable~double~ rawData)* object
         +MeanAndStdHtmlReport(IEnumerable~Measurement~ data)\$ string
         +MedianMarkdownReport(IEnumerable~Measurement~ data)\$ string
         +MeanAndStdMarkdownReport(IEnumerable~Measurement~ measurements)\$ string
@@ -40,19 +46,17 @@ classDiagram
     }
 
     class Measurement {
-        <<struct/class>>
         +double Temperature
         +double Humidity
     }
 
     class MeanAndStd {
-        <<struct/class>>
         +double Mean
         +double Std
     }
 
-    ReportMakerHelper ..> ReportMaker : Создает
-    ReportMaker ..> Measurement : Читает
-    ReportMakerHelper ..> Measurement : Принимает
-    ReportMakerHelper ..> MeanAndStd : Возвращает
+    ReportMakerHelper ..> ReportMaker : создает
+    ReportMakerHelper ..> ReportFormatter : использует
+    ReportMakerHelper ..> ReportCalculator : использует
+    ReportMaker ..> Measurement : читает
 ```
