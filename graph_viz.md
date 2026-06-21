@@ -7,7 +7,6 @@
 ## 2. Диаграмма классов (Mermaid)
 
 ```mermaid
-
 classDiagram
     class IGraphBuilder {
         <<interface>>
@@ -26,13 +25,10 @@ classDiagram
         +With(configure: Action~IEdgeAttributes~) IGraphBuilder
     }
 
-    IGraphBuilder <|-- INodeBuilder : расширяет
-    IGraphBuilder <|-- IEdgeBuilder : расширяет
-
     class INodeAttributes {
         <<interface>>
         +Color(colorName: string) INodeAttributes
-        +FontSize(size: int) INodeAttributes
+        +FontSize(size: int) IEdgeAttributes
         +Label(labelText: string) INodeAttributes
         +Shape(shapeType: NodeShape) INodeAttributes
     }
@@ -50,48 +46,23 @@ classDiagram
         Box
         Ellipse
     }
-    INodeAttributes ..> NodeShape : использует
 
     class DotGraphBuilder {
         -Graph myGraph
-        +DirectedGraph(graphName: string)$ IGraphBuilder
-        +UndirectedGraph(graphName: string)$ IGraphBuilder
-        +AddNode(nodeName: string) INodeBuilder
-        +AddEdge(from: string, to: string) IEdgeBuilder
-        +Build() string
+        -GraphNode nodeInstance
+        -GraphEdge edgeInstance
+        +DirectedGraph(graphName: string)\$ IGraphBuilder
+        +UndirectedGraph(graphName: string)\$ IGraphBuilder
     }
-    IGraphBuilder <|.. DotGraphBuilder : реализует
 
-    class GraphNodeBuilder {
-        -IGraphBuilder graphBuilder
-        -GraphNode currentNode
-        +With(configure: Action~INodeAttributes~) IGraphBuilder
-        +Color(colorName: string) INodeAttributes
-        +FontSize(size: int) INodeAttributes
-        +Label(labelText: string) INodeAttributes
-        +Shape(shapeType: NodeShape) INodeAttributes
-        +AddNode(nodeName: string) INodeBuilder
-        +AddEdge(from: string, to: string) IEdgeBuilder
-        +Build() string
-    }
-    INodeBuilder <|.. GraphNodeBuilder : реализует
-    INodeAttributes <|.. GraphNodeBuilder : реализует
-    GraphNodeBuilder --> IGraphBuilder : делегирует вызовы
+    IGraphBuilder <|-- INodeBuilder
+    IGraphBuilder <|-- IEdgeBuilder
 
-    class GraphEdgeBuilder {
-        -IGraphBuilder graphBuilder
-        -GraphEdge currentEdge
-        +With(configure: Action~IEdgeAttributes~) IGraphBuilder
-        +Color(colorName: string) IEdgeAttributes
-        +FontSize(size: int) IEdgeAttributes
-        +Label(labelText: string) IEdgeAttributes
-        +Weight(weightValue: double) IEdgeAttributes
-        +AddNode(nodeName: string) INodeBuilder
-        +AddEdge(from: string, to: string) IEdgeBuilder
-        +Build() string
-    }
-    IEdgeBuilder <|.. GraphEdgeBuilder : реализует
-    IEdgeAttributes <|.. GraphEdgeBuilder : реализует
-    GraphEdgeBuilder --> IGraphBuilder : делегирует вызовы
-    
+    IGraphBuilder <|.. DotGraphBuilder
+    INodeBuilder <|.. DotGraphBuilder
+    IEdgeBuilder <|.. DotGraphBuilder
+    INodeAttributes <|.. DotGraphBuilder
+    IEdgeAttributes <|.. DotGraphBuilder
+
+    INodeAttributes ..> NodeShape
 ```
