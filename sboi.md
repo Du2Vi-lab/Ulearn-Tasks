@@ -6,7 +6,6 @@
 
 ## 2. Диаграмма классов
 ```mermaid
-%%{init: {'theme': 'neutral'}}%%
 classDiagram
     class FailureType {
         UnexpectedShutdown = 0
