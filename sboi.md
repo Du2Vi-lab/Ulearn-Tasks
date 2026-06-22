@@ -8,7 +8,6 @@
 ```mermaid
 classDiagram
     class FailureType {
-        <<enumeration>>
         UnexpectedShutdown = 0
         ShortNonResponding = 1
         HardwareFailures = 2
