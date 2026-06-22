@@ -6,17 +6,6 @@
 
 ## 2. Диаграмма классов
 ```mermaid
-%%{init: {
-  'theme': 'base',
-  'themeVariables': {
-    'primaryColor': '#E6E6FA',
-    'primaryTextColor': '#000000',
-    'primaryBorderColor': '#9370DB',
-    'lineColor': '#666666',
-    'secondaryColor': '#F5F5F5',
-    'tertiaryColor': '#FFFFFF'
-  }
-}}%%
 classDiagram
     class FailureType {
         UnexpectedShutdown = 0
